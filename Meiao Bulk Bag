@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meiao Bulk Bag Ltd. | B2B Procurement Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #F9FAFB;
+            color: #0A2540;
+        }
+        .bg-meiao-blue { background-color: #0A2540; }
+        .text-meiao-blue { color: #0A2540; }
+        .bg-meiao-orange { background-color: #FF6B00; }
+        .hover-bg-meiao-orange:hover { background-color: #e66000; }
+        .text-meiao-orange { color: #FF6B00; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .step-hidden { display: none; }
+        .step-active { display: block; animation: fadeIn 0.4s ease-in-out; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Chosen Palette: Industrial Navy Blue (#0A2540), Clean White (#FFFFFF), Light Grey (#F9FAFB), Vibrant Safety Orange (#FF6B00) -->
+    <!-- Application Structure Plan: A hybrid landing-page/dashboard designed for B2B procurement managers. It prioritizes immediate trust-building (Hero + Export Data Viz), frictionless exploration of product capabilities (Interactive Product Catalog), transparent workflows (Process Steps), and an optimized conversion funnel (Multi-step Quote Form). This linear yet interactive flow guides the user from awareness directly to lead generation without page reloads. -->
+    <!-- Visualization & Content Choices: 1. Export Reach -> Goal: Trust/Authority -> Viz: Chart.js Doughnut Chart -> Interaction: Hover tooltips -> Justifies "40+ countries" claim dynamically. 2. Core Products -> Goal: Inform/Organize -> Viz: Interactive Details Panel -> Interaction: Clickable grid cards -> Keeps UI clean while providing deep technical specs (SWL, SF) needed by B2B buyers. NO SVG or Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="bg-meiao-blue text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 font-bold text-2xl tracking-wider">
+                    MEIAO<span class="text-meiao-orange">.</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-meiao-orange transition">Home</a>
+                    <a href="#products" class="hover:text-meiao-orange transition">Products</a>
+                    <a href="#advantage" class="hover:text-meiao-orange transition">Why Us</a>
+                    <a href="#quote" class="hover:text-meiao-orange transition">Contact</a>
+                </div>
+                <div>
+                    <a href="#quote" class="bg-meiao-orange hover-bg-meiao-orange text-white px-6 py-2 rounded font-semibold transition">Request a Quote</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="fixed bottom-6 right-6 z-50">
+        <button class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg font-bold text-xl flex items-center justify-center h-16 w-16 transition transform hover:scale-110">
+            &#128222;
+        </button>
+    </div>
+
+    <section id="home" class="relative bg-meiao-blue text-white py-20 lg:py-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
+                Reliable FIBC Bulk Bags <br/><span class="text-meiao-orange">for the Global Supply Chain.</span>
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">
+                Factory-direct jumbo bags engineered for safety, compliance, and strength. Exporting premium UN-certified and food-grade FIBCs to the USA, Europe, and the Middle East with guaranteed on-time delivery.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#quote" class="bg-meiao-orange hover-bg-meiao-orange text-white text-lg px-8 py-4 rounded font-bold shadow-lg transition">Request a Custom Quote</a>
+                <a href="#products" class="bg-transparent border-2 border-white hover:bg-white hover:text-meiao-blue text-white text-lg px-8 py-4 rounded font-bold transition">View Product Catalog</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-white border-b border-gray-200 py-6 shadow-sm relative z-10 -mt-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="p-2"><span class="text-2xl block mb-1">&#128302;</span><span class="font-bold text-meiao-blue">ISO 9001 & UN Certified</span></div>
+                <div class="p-2"><span class="text-2xl block mb-1">&#127981;</span><span class="font-bold text-meiao-blue">100% Factory Direct</span></div>
+                <div class="p-2"><span class="text-2xl block mb-1">&#127757;</span><span class="font-bold text-meiao-blue">Exporting to 40+ Countries</span></div>
+                <div class="p-2"><span class="text-2xl block mb-1">&#9989;</span><span class="font-bold text-meiao-blue">100% Quality Inspected</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <p class="text-sm font-bold tracking-widest text-meiao-orange uppercase">Global Reach</p>
+                <h2 class="text-3xl font-extrabold text-meiao-blue mt-2">Trusted Worldwide</h2>
+                <p class="mt-4 text-gray-600 max-w-2xl">This section visualizes our established global export network. As a reliable B2B partner, our data shows strong penetration in heavily regulated markets, proving our capacity to handle complex logistics and strict quality compliance across different continents.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-md p-6 border border-gray-100 flex flex-col md:flex-row items-center gap-8">
+                <div class="w-full md:w-1/2">
+                    <div class="chart-container">
+                        <canvas id="exportChart"></canvas>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 space-y-6">
+                    <h3 class="text-2xl font-bold text-meiao-blue">Consistent Supply to 40+ Nations</h3>
+                    <p class="text-gray-600">Our dedicated logistics team ensures smooth port-to-port delivery, handling all customs documentation. We dominate in markets demanding the highest standards for Food-Grade and UN-Certified bulk packaging.</p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center"><span class="text-meiao-orange mr-2">&#9632;</span> <strong>North America (40%):</strong> Strict compliance with FDA and UN transport regulations.</li>
+                        <li class="flex items-center"><span class="text-meiao-blue mr-2">&#9632;</span> <strong>Europe (35%):</strong> Providing BRC-certified cleanroom products for the Agri-Corp sector.</li>
+                        <li class="flex items-center"><span class="text-gray-400 mr-2">&#9632;</span> <strong>Middle East (15%):</strong> Heavy-duty bags engineered for extreme temperatures and mining.</li>
+                        <li class="flex items-center"><span class="text-gray-200 mr-2">&#9632;</span> <strong>Asia & Others (10%):</strong> Fast-growing emerging industrial markets.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <p class="text-sm font-bold tracking-widest text-meiao-orange uppercase">Our Capabilities</p>
+                <h2 class="text-3xl font-extrabold text-meiao-blue mt-2">High-Performance Packaging for Every Industry</h2>
+                <p class="mt-4 text-gray-600 max-w-2xl">Explore our core product lines below. This interactive catalog allows you to select specific bag categories to immediately view crucial technical specifications like Safe Working Load (SWL), fabric weight, and ideal industry use-cases. Select a product to see the details.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="lg:col-span-1 space-y-3">
+                    <button id="btn-standard" class="w-full text-left p-4 rounded border-2 border-meiao-blue bg-meiao-blue text-white font-bold text-lg transition shadow-md">Standard FIBC (Type A-D)</button>
+                    <button id="btn-food" class="w-full text-left p-4 rounded border-2 border-gray-200 bg-white text-meiao-blue hover:border-meiao-orange font-bold text-lg transition shadow-sm">Food-Grade Bulk Bags</button>
+                    <button id="btn-un" class="w-full text-left p-4 rounded border-2 border-gray-200 bg-white text-meiao-blue hover:border-meiao-orange font-bold text-lg transition shadow-sm">UN-Certified Bags</button>
+                    <button id="btn-vent" class="w-full text-left p-4 rounded border-2 border-gray-200 bg-white text-meiao-blue hover:border-meiao-orange font-bold text-lg transition shadow-sm">Ventilated Bags</button>
+                </div>
+
+                <div class="lg:col-span-2">
+                    <div id="product-display" class="bg-gray-50 border border-gray-200 rounded-xl p-8 h-full fade-in shadow-inner">
+                        <h3 id="display-title" class="text-3xl font-extrabold text-meiao-blue mb-4">Standard FIBC Bags (Types A, B, C, D)</h3>
+                        <p id="display-desc" class="text-lg text-gray-700 mb-6">Versatile, heavy-duty packaging for general industrial use. Engineered for a wide variety of dry flowable goods.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <h4 class="font-bold text-meiao-blue mb-2 border-b-2 border-meiao-orange inline-block pb-1">Key Features</h4>
+                                <ul id="display-features" class="space-y-2 text-gray-600">
+                                    <li>&#10004; 100% Virgin PP Material</li>
+                                    <li>&#10004; U-Panel or Circular Woven options</li>
+                                    <li>&#10004; UV treated for outdoor storage</li>
+                                    <li>&#10004; Fully customizable dimensions</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white p-4 rounded border border-gray-200 shadow-sm">
+                                <h4 class="font-bold text-meiao-blue mb-3">Technical Specifications</h4>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between border-b pb-1">
+                                        <span class="text-gray-500">SWL:</span>
+                                        <span id="display-swl" class="font-semibold text-gray-800">500kg - 2500kg</span>
+                                    </div>
+                                    <div class="flex justify-between border-b pb-1">
+                                        <span class="text-gray-500">Safety Factor:</span>
+                                        <span id="display-sf" class="font-semibold text-gray-800">5:1 (Single) / 6:1 (Multi)</span>
+                                    </div>
+                                    <div class="flex justify-between border-b pb-1">
+                                        <span class="text-gray-500">Fabric:</span>
+                                        <span id="display-fabric" class="font-semibold text-gray-800">130gsm - 220gsm</span>
+                                    </div>
+                                    <div class="flex justify-between border-b pb-1">
+                                        <span class="text-gray-500">Ideal Uses:</span>
+                                        <span id="display-uses" class="font-semibold text-gray-800 text-right w-1/2">Construction, Mining, Resins</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#quote" class="inline-block bg-meiao-blue hover:bg-slate-800 text-white px-6 py-3 rounded font-bold transition">Request Quote for this Product &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="advantage" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-meiao-blue">The Meiao Manufacturing Advantage</h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">We don't just supply bags; we optimize your packaging operations. Review our core operational strengths below to understand how we reduce supply chain risks and costs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-meiao-orange">
+                    <div class="text-4xl mb-4">&#128176;</div>
+                    <h3 class="text-xl font-bold text-meiao-blue mb-2">Cost-Effective Manufacturing</h3>
+                    <p class="text-gray-600 text-sm">Direct-from-factory pricing eliminates middlemen without sacrificing fabric strength or safety parameters.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-meiao-blue">
+                    <div class="text-4xl mb-4">&#128736;</div>
+                    <h3 class="text-xl font-bold text-meiao-blue mb-2">Custom Engineering</h3>
+                    <p class="text-gray-600 text-sm">Need specific SWL, custom lifting loops, baffles, or full-color branding? We manufacture strictly to your exact specs.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-meiao-orange">
+                    <div class="text-4xl mb-4">&#128269;</div>
+                    <h3 class="text-xl font-bold text-meiao-blue mb-2">Uncompromising Quality</h3>
+                    <p class="text-gray-600 text-sm">Every batch undergoes rigorous drop, tear, and UV resistance testing before it receives clearance to leave our facility.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-meiao-blue">
+                    <div class="text-4xl mb-4">&#128674;</div>
+                    <h3 class="text-xl font-bold text-meiao-blue mb-2">Global Export Expertise</h3>
+                    <p class="text-gray-600 text-sm">From dense container loading optimization to handling complex customs documentation, we ensure smooth delivery.</p>
+                </div>
+            </div>
+
+            <div class="mt-20">
+                <h3 class="text-2xl font-bold text-meiao-blue mb-8 text-center">From Inquiry to Delivery in 4 Simple Steps</h3>
+                <div class="flex flex-col md:flex-row justify-between items-center relative">
+                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-300 -z-10 transform -translate-y-1/2"></div>
+                    
+                    <div class="bg-white border-2 border-meiao-blue w-64 p-4 rounded-xl text-center shadow-lg mb-4 md:mb-0">
+                        <div class="bg-meiao-blue text-white w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">1</div>
+                        <h4 class="font-bold text-meiao-blue">Submit Specifications</h4>
+                        <p class="text-xs text-gray-500 mt-1">Send technical requirements or current bag specs via our portal.</p>
+                    </div>
+                    
+                    <div class="bg-white border-2 border-gray-300 w-64 p-4 rounded-xl text-center shadow mb-4 md:mb-0">
+                        <div class="bg-gray-300 text-gray-700 w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">2</div>
+                        <h4 class="font-bold text-gray-700">Quote & Sampling</h4>
+                        <p class="text-xs text-gray-500 mt-1">Transparent quote provided. Physical sample created for approval.</p>
+                    </div>
+
+                    <div class="bg-white border-2 border-gray-300 w-64 p-4 rounded-xl text-center shadow mb-4 md:mb-0">
+                        <div class="bg-gray-300 text-gray-700 w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">3</div>
+                        <h4 class="font-bold text-gray-700">Mass Production</h4>
+                        <p class="text-xs text-gray-500 mt-1">Order manufactured in our state-of-the-art facility.</p>
+                    </div>
+
+                    <div class="bg-white border-2 border-gray-300 w-64 p-4 rounded-xl text-center shadow">
+                        <div class="bg-gray-300 text-gray-700 w-8 h-8 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">4</div>
+                        <h4 class="font-bold text-gray-700">Global Freight</h4>
+                        <p class="text-xs text-gray-500 mt-1">Logistics handled completely to arrive safely on schedule.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-center text-meiao-blue mb-12">Trusted by Procurement Teams Worldwide</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 relative">
+                    <span class="text-6xl text-gray-300 absolute top-2 left-4 font-serif">"</span>
+                    <p class="text-gray-700 relative z-10 italic mb-6 pt-4">Meiao Bulk Bag Ltd. has stabilized our packaging supply chain. Their food-grade bags are consistently flawless, and their shipping times to the EU are incredibly reliable.</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-meiao-blue rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">EA</div>
+                        <div>
+                            <p class="font-bold text-meiao-blue">Procurement Director</p>
+                            <p class="text-sm text-gray-500">European Agri-Corp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-lg border border-gray-200 relative">
+                    <span class="text-6xl text-gray-300 absolute top-2 left-4 font-serif">"</span>
+                    <p class="text-gray-700 relative z-10 italic mb-6 pt-4">Finding a dependable supplier for UN-certified bags was tough until we found Meiao. Top-tier quality and their customer service team is highly responsive.</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-meiao-orange rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">US</div>
+                        <div>
+                            <p class="font-bold text-meiao-blue">Logistics Manager</p>
+                            <p class="text-sm text-gray-500">US Chemical Wholesaler</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quote" class="py-20 bg-meiao-blue text-white relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-extrabold mb-4">Ready to Upgrade Your Bulk Packaging?</h2>
+                <p class="text-xl text-gray-300">Get a competitive, factory-direct quote from our specialists within 24 hours. This dynamic form captures all necessary data to accelerate your procurement process.</p>
+            </div>
+
+            <div class="bg-white text-gray-800 rounded-xl shadow-2xl p-8 max-w-2xl mx-auto">
+                <div class="flex justify-between mb-8 border-b pb-4">
+                    <div id="tracker-1" class="font-bold text-meiao-orange">1. Product</div>
+                    <div id="tracker-2" class="font-bold text-gray-400">2. Specs</div>
+                    <div id="tracker-3" class="font-bold text-gray-400">3. Volume</div>
+                    <div id="tracker-4" class="font-bold text-gray-400">4. Contact</div>
+                </div>
+
+                <div id="step-1" class="step-active">
+                    <h3 class="text-2xl font-bold text-meiao-blue mb-4">What type of bag do you need?</h3>
+                    <select id="form-bag-type" class="w-full p-4 border border-gray-300 rounded focus:outline-none focus:border-meiao-orange text-lg mb-6 bg-white">
+                        <option value="">-- Select Product Category --</option>
+                        <option value="standard">Standard FIBC (Type A/B/C/D)</option>
+                        <option value="food">Food-Grade Bulk Bags</option>
+                        <option value="un">UN-Certified Bags</option>
+                        <option value="ventilated">Ventilated / Breathable Bags</option>
+                        <option value="custom">Custom / Unsure</option>
+                    </select>
+                    <div class="text-right">
+                        <button onclick="changeStep(2)" class="bg-meiao-blue hover:bg-slate-800 text-white px-8 py-3 rounded font-bold transition">Next Step</button>
+                    </div>
+                </div>
+
+                <div id="step-2" class="step-hidden">
+                    <h3 class="text-2xl font-bold text-meiao-blue mb-4">Dimensions & Capacity</h3>
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Required Safe Working Load (SWL)</label>
+                            <select class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-meiao-orange bg-white">
+                                <option>500 kg</option>
+                                <option>1000 kg (1 Ton)</option>
+                                <option>1500 kg</option>
+                                <option>2000 kg</option>
+                                <option>Other / Custom</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-1">Do you have specific dimensions?</label>
+                            <input type="text" placeholder="e.g., 90x90x110 cm (Optional)" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-meiao-orange">
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <button onclick="changeStep(1)" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded font-bold transition">Back</button>
+                        <button onclick="changeStep(3)" class="bg-meiao-blue hover:bg-slate-800 text-white px-8 py-3 rounded font-bold transition">Next Step</button>
+                    </div>
+                </div>
+
+                <div id="step-3" class="step-hidden">
+                    <h3 class="text-2xl font-bold text-meiao-blue mb-4">Estimated Order Volume</h3>
+                    <p class="text-sm text-gray-500 mb-4">Pricing heavily depends on volume. Let us know your requirements to provide an accurate quote.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <label class="border p-4 rounded cursor-pointer hover:border-meiao-orange flex items-center">
+                            <input type="radio" name="volume" class="mr-3 h-5 w-5 text-meiao-orange"> Less than Container Load (LCL)
+                        </label>
+                        <label class="border p-4 rounded cursor-pointer hover:border-meiao-orange flex items-center">
+                            <input type="radio" name="volume" class="mr-3 h-5 w-5 text-meiao-orange"> 1 x 20ft Container
+                        </label>
+                        <label class="border p-4 rounded cursor-pointer hover:border-meiao-orange flex items-center">
+                            <input type="radio" name="volume" class="mr-3 h-5 w-5 text-meiao-orange"> 1 x 40ft Container (HQ)
+                        </label>
+                        <label class="border p-4 rounded cursor-pointer hover:border-meiao-orange flex items-center">
+                            <input type="radio" name="volume" class="mr-3 h-5 w-5 text-meiao-orange"> Ongoing Monthly Supply
+                        </label>
+                    </div>
+                    <div class="flex justify-between">
+                        <button onclick="changeStep(2)" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded font-bold transition">Back</button>
+                        <button onclick="changeStep(4)" class="bg-meiao-blue hover:bg-slate-800 text-white px-8 py-3 rounded font-bold transition">Final Step</button>
+                    </div>
+                </div>
+
+                <div id="step-4" class="step-hidden">
+                    <h3 class="text-2xl font-bold text-meiao-blue mb-4">Contact Information</h3>
+                    <div class="space-y-4 mb-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="First Name" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-meiao-orange">
+                            <input type="text" placeholder="Last Name" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-meiao-orange">
+                        </div>
+                        <input type="text" placeholder="Company Name" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-meiao-orange">
+                        <input type="email" placeholder="Corporate Email Address" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:border-meiao-orange">
+                        <div class="border-2 border-dashed border-gray-300 p-4 text-center rounded bg-gray-50">
+                            <span class="text-2xl block mb-2">&#128193;</span>
+                            <span class="text-sm text-gray-600">Upload technical drawings or spec sheets (PDF, JPG)</span>
+                            <input type="file" class="hidden">
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <button onclick="changeStep(3)" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded font-bold transition">Back</button>
+                        <button onclick="submitForm()" class="bg-meiao-orange hover-bg-meiao-orange text-white px-8 py-3 rounded font-bold transition text-lg shadow-lg">Get Your Free Quote Now</button>
+                    </div>
+                </div>
+
+                <div id="step-success" class="step-hidden text-center py-8">
+                    <div class="text-6xl text-green-500 mb-4">&#10004;</div>
+                    <h3 class="text-3xl font-bold text-meiao-blue mb-2">Request Received</h3>
+                    <p class="text-gray-600 text-lg">Thank you. Our procurement specialists will review your requirements and contact you within 24 hours.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-gray-400 py-12 text-center border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center space-x-6 mb-6">
+                <span class="border border-gray-600 px-3 py-1 rounded text-sm">ISO 9001 Certified</span>
+                <span class="border border-gray-600 px-3 py-1 rounded text-sm">UN Testing Compliant</span>
+                <span class="border border-gray-600 px-3 py-1 rounded text-sm">BRC/HACCP Ready</span>
+            </div>
+            <p>&copy; 2026 Meiao Bulk Bag Ltd. All Rights Reserved. Global Industrial Packaging Solutions.</p>
+        </div>
+    </footer>
+
+    <script>
+        const productData = {
+            standard: {
+                title: "Standard FIBC Bags (Types A, B, C, D)",
+                desc: "Versatile, heavy-duty packaging for general industrial use. Engineered for a wide variety of dry flowable goods.",
+                features: ["&#10004; 100% Virgin PP Material", "&#10004; U-Panel or Circular Woven options", "&#10004; UV treated for outdoor storage", "&#10004; Fully customizable dimensions"],
+                swl: "500kg - 2500kg",
+                sf: "5:1 (Single) / 6:1 (Multi)",
+                fabric: "130gsm - 220gsm",
+                uses: "Construction, Mining, Resins"
+            },
+            food: {
+                title: "Premium Food-Grade FIBC Bulk Bags",
+                desc: "Manufactured in our state-of-the-art, BRC-certified cleanrooms, our food-grade jumbo bags guarantee 100% safety for agricultural and consumable products. No contamination, no compromises.",
+                features: ["&#10004; Produced in strict cleanroom environments", "&#10004; Ultrasonic cutting to prevent loose threads", "&#10004; Vacuumed and metal-detected", "&#10004; 100% food-safe virgin PP"],
+                swl: "500kg - 2000kg",
+                sf: "5:1 or 6:1",
+                fabric: "130gsm - 220gsm (Customizable)",
+                uses: "Flour, Sugar, Rice, Spices"
+            },
+            un: {
+                title: "UN-Certified Hazardous Material Bags",
+                desc: "Rigorously tested and certified for the safe transport of hazardous materials. Compliance you can trust when safety is not optional.",
+                features: ["&#10004; Passes rigorous drop & tear tests", "&#10004; Meets international UN transport regulations", "&#10004; Anti-static (Type C/D) options available", "&#10004; Leak-proof inner liners"],
+                swl: "Up to 2000kg",
+                sf: "6:1 Mandatory",
+                fabric: "Heavy Duty 180gsm+",
+                uses: "Chemicals, Toxic Powders"
+            },
+            vent: {
+                title: "Ventilated Agricultural Bags",
+                desc: "Breathable fabrics perfect for agricultural products. Prevents moisture buildup and spoilage during transit.",
+                features: ["&#10004; Woven with specialized breathable strips", "&#10004; Maintains product freshness", "&#10004; Strong enough for heavy root crops", "&#10004; High UV protection for field use"],
+                swl: "1000kg - 1500kg",
+                sf: "5:1",
+                fabric: "Ventilated PP Mesh",
+                uses: "Potatoes, Onions, Logs"
+            }
+        };
+
+        const buttons = {
+            standard: document.getElementById('btn-standard'),
+            food: document.getElementById('btn-food'),
+            un: document.getElementById('btn-un'),
+            vent: document.getElementById('btn-vent')
+        };
+
+        function resetButtons() {
+            Object.values(buttons).forEach(btn => {
+                btn.className = "w-full text-left p-4 rounded border-2 border-gray-200 bg-white text-meiao-blue hover:border-meiao-orange font-bold text-lg transition shadow-sm";
+            });
+        }
+
+        function updateProductDisplay(type) {
+            resetButtons();
+            const activeBtn = buttons[type];
+            activeBtn.className = "w-full text-left p-4 rounded border-2 border-meiao-blue bg-meiao-blue text-white font-bold text-lg transition shadow-md";
+            
+            const data = productData[type];
+            
+            const display = document.getElementById('product-display');
+            display.classList.remove('fade-in');
+            void display.offsetWidth; 
+            display.classList.add('fade-in');
+
+            document.getElementById('display-title').innerText = data.title;
+            document.getElementById('display-desc').innerText = data.desc;
+            
+            const featuresList = document.getElementById('display-features');
+            featuresList.innerHTML = '';
+            data.features.forEach(f => {
+                let li = document.createElement('li');
+                li.innerHTML = f;
+                featuresList.appendChild(li);
+            });
+
+            document.getElementById('display-swl').innerText = data.swl;
+            document.getElementById('display-sf').innerText = data.sf;
+            document.getElementById('display-fabric').innerText = data.fabric;
+            document.getElementById('display-uses').innerText = data.uses;
+        }
+
+        buttons.standard.addEventListener('click', () => updateProductDisplay('standard'));
+        buttons.food.addEventListener('click', () => updateProductDisplay('food'));
+        buttons.un.addEventListener('click', () => updateProductDisplay('un'));
+        buttons.vent.addEventListener('click', () => updateProductDisplay('vent'));
+
+        function changeStep(stepNum) {
+            document.getElementById('step-1').className = 'step-hidden';
+            document.getElementById('step-2').className = 'step-hidden';
+            document.getElementById('step-3').className = 'step-hidden';
+            document.getElementById('step-4').className = 'step-hidden';
+            
+            document.getElementById('step-' + stepNum).className = 'step-active';
+
+            for(let i=1; i<=4; i++) {
+                let tracker = document.getElementById('tracker-' + i);
+                if(i < stepNum) {
+                    tracker.className = "font-bold text-meiao-blue";
+                } else if (i === stepNum) {
+                    tracker.className = "font-bold text-meiao-orange";
+                } else {
+                    tracker.className = "font-bold text-gray-400";
+                }
+            }
+        }
+
+        function submitForm() {
+            document.getElementById('step-4').className = 'step-hidden';
+            document.getElementById('step-success').className = 'step-active';
+            for(let i=1; i<=4; i++) {
+                document.getElementById('tracker-' + i).className = "font-bold text-meiao-blue";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('exportChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['North America', 'Europe', 'Middle East', 'Asia & Others'],
+                    datasets: [{
+                        data: [40, 35, 15, 10],
+                        backgroundColor: [
+                            '#FF6B00',
+                            '#0A2540',
+                            '#9CA3AF',
+                            '#E5E7EB'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ' ' + context.label + ': ' + context.parsed + '% of Export Volume';
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
